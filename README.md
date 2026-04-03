@@ -40,7 +40,7 @@ A production-grade, full-stack bidding application built with **Spring Boot** (b
                        │
           ┌────────────┴─────────────┐
           ▼                          ▼
-    Redis (Lock + Cache)        H2 / PostgreSQL
+    Redis (Lock + Cache)        MySQL database
     per-item mutex              Users, Items, Bids
     ~0.1ms check                RefreshTokens
 ```
@@ -224,7 +224,6 @@ bidstream/
 docker-compose up --build
 # Frontend: http://localhost:3000
 # Backend:  http://localhost:8080
-# H2 Console: http://localhost:8080/h2-console
 ```
 
 ### Option B: Manual
@@ -281,8 +280,6 @@ npm start
 ---
 
 ## Production Hardening Checklist
-
-- [ ] Replace H2 with PostgreSQL (change `spring.datasource.*`)
 - [ ] Set `cookie.setSecure(true)` in AuthController (requires HTTPS)
 - [ ] Use a Redis Cluster for HA lock service
 - [ ] Add Redis Pub/Sub for multi-instance WebSocket broadcasting
